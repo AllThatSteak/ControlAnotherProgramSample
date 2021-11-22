@@ -35,9 +35,33 @@ namespace WinFormsApp1
             if (Process != null)
             {
                 SetForegroundWindow(Process.MainWindowHandle);
+                for (int i = 0; i < 10; i++)
+                {
+                    SendKeys.Send("P");
+                }
                 SendKeys.Send("💩 💩 💩 💩 💩 💩 💩 💩 💩 💩 💩 💩 💩 💩 💩 💩");
                 SendKeys.Send("{ENTER}");
             }
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            panel1.DoDragDrop(panel1, DragDropEffects.Move);
+        }
+
+        private void btnStart_MouseDown(object sender, MouseEventArgs e)
+        {
+            btnStart.DoDragDrop("MOOP", DragDropEffects.Move);
+        }
+
+        private void panel1_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void panel1_DragDrop(object sender, DragEventArgs e)
+        {
+            ((Button)e.Data.GetData(typeof(Button))).Parent = (Panel)sender;
         }
     }
 }
